@@ -24,7 +24,7 @@
           </tr>
         </thead>
         <tbody id="corpoTabela">
-          <!-- Dados serão inseridos aqui -->
+          
         </tbody>
       </table>
     </div>
