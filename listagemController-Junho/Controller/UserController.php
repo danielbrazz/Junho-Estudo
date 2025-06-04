@@ -14,5 +14,6 @@ class UserController
 }
 
 $controller = new UserController();
-die(json_encode($controller->index()));
+echo json_encode($controller->index());
+
 

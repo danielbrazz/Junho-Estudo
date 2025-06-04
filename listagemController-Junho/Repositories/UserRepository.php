@@ -1,17 +1,31 @@
 <?php
 
+require_once __DIR__.'/../Services/ConBD.php';
+
 class UserRepository 
 {
     public function getRepository():array
     {
-        $repos = [];
+        
+        $db = new Connection();
+        $conn = $db->connectionMSQL(); // Correção 1
+ 
+        $sql = "SELECT * FROM listinventory"; // Correção 2
 
-        $itens = [["id" => 1, "nome" => "Caixa","qtd"=>12,"valor"=>10],["id" => 2, "nome" => "Prateleira","qtd"=>3,"valor"=>35],["id"=>3,"nome"=>"Elevador","qtd"=>5,"valor"=>200]];//ajustado
+        $result = $conn->query($sql); // Correção 3: usamos query simples ao invés de prepare
 
-        foreach($itens as $key => $value){
-            $repos[$key] = $value;
+        if ($result->num_rows > 0) {
+            $repos = [];
+
+            while ($row = $result->fetch_assoc()) {
+                $repos[] = ($row); // Acumula os resultados no array
+            }
+
+            return ($repos);
+        } else {
+            return []; // Nenhum resultado
         }
-
-        return $repos;
     }
 }
+
+?>

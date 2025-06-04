@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -41,23 +42,20 @@
       $('#carregarTabela').on('click', function () {
         $.ajax({
           url: 'Controller/UserController.php',
-          method: 'GET',
-          dataType: 'json',
-          success: function (dados) {
+          method: 'POST',       
+          success: function (data) {
             let html = '';
+            dados = JSON.parse(data);
             dados.forEach(item => {
               html += `<tr>
                           <td>${item.id}</td>
-                          <td>${item.nome}</td>
-                          <td>${item.qtd}</td>
-                          <td>${item.valor}</td>
+                          <td>${item.Item}</td>
+                          <td>${item.Quantidade}</td>
+                          <td>${item.Valor}</td>
                         </tr>`;
             });
             $('#corpoTabela').html(html);
             $('#tabelaUsuarios').removeClass('d-none');
-          },
-          error: function () {
-            alert("Erro ao carregar dados!");
           }
         });
       });

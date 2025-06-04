@@ -1,13 +1,24 @@
 <?php
-$servername = "localhost";
-$username = "root";           // Padrão no XAMPP
-$password = "";               // Normalmente em branco
-$dbname = "controllerlist";   // Seu banco
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+class Connection {
+  private  $servername = "localhost";
+  private  $username = "root";           // Padrão no XAMPP
+  private  $password = "";               // Normalmente em branco
+  private  $dbname = "controllerlist";   // Seu banco
+  private $conn;
 
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+  public function connectionMSQL(){
+   $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+   
+
+    if ($this->conn->connect_error) {
+      die("Connection failed: " . $this->conn->connect_error);
+    }
+     $this->conn->set_charset("utf8mb4");
+
+    return $this->conn;
+  }
 }
-echo "Connected successfully";
+
+
 ?>
