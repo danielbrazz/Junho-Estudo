@@ -2,9 +2,9 @@
 
 class Connection {
   private  $servername = "localhost";
-  private  $username = "root";           // Padrão no XAMPP
-  private  $password = "";               // Normalmente em branco
-  private  $dbname = "controllerlist";   // Seu banco
+  private  $username = "root";          
+  private  $password = "";              
+  private  $dbname = "controllerlist";  
   private $conn;
 
   public function connectionMSQL(){
