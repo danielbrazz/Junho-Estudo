@@ -13,7 +13,7 @@ class Auth_jwt
 {
     private $encode;
     private $decode;
-
+ 
     public function authLoginJWT($payload)
     {
         $this->encode = JWT::encode($payload, $_ENV['KEY'], 'HS256');
