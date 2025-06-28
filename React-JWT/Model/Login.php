@@ -39,24 +39,22 @@
             $user = $sql->fetch(PDO::FETCH_ASSOC);
 
             $payload =[
-                "exp" => time()+10,
+                "exp" => time()+3600,
                 "iat" => time(),
-                "email" =>$user['login']
+                "email" =>$user['email']
             ];
 
            
              if ($user) {
                 // Retorna o nome do usuário ou qualquer outro dado necessário
                 $authJWT = new Auth_jwt;
-                $token=$authJWT->authLoginJWT($payload);
-
-              //  $validToken = $authJWT->authValid($token);
-
+                $authJWT->authLoginJWT($payload);          
+             
 
                  echo json_encode([
                     'success' => true,
-                    'token' => $token,
-                    'user' => $user['login']
+                   
+                    'user' => $user['nome']
                 ]);
 
             } else {
@@ -72,4 +70,7 @@
         }
     }
   
-    
+  
+
+   
+

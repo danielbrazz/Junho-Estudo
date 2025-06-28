@@ -1,6 +1,12 @@
 import React, { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { useNavigate } from "react-router-dom"; // ← ESTA LINHA FALTAVA!
+
 
 function Login() {
+    const navigate = useNavigate(); // ← aqui
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState(""); // ← adiciona estado para erro
@@ -10,6 +16,8 @@ function Login() {
 
     const response = await fetch("http://localhost/Junho-Estudo/React-JWT/Controller/FormLogin.php", { // seu backend PHP
       method: "POST",
+        credentials: "include", // 🔥 Isso permite o cookie vir do PHP
+
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
@@ -23,14 +31,14 @@ function Login() {
 
     if (data.success) {
       // Login válido
-      setErrorMessage(""); // limpa erros
-        sessionStorage.setItem("session", data.token); // Corrigido aqui
+      setErrorMessage(""); // limpa erros        
+      navigate("/home");
 
       // Redirecionar ou armazenar token, etc.
-      alert("Login realizado com sucesso! Bem-vindo, " + data.nome);
+      alert("Login realizado com sucesso! Bem-vindo, " + data.user);      
     } else {
       // Login inválido
-      setErrorMessage(data.message || "Erro ao fazer login.");
+      setErrorMessage("Erro ao fazer login.");
     }
   };
 
@@ -66,7 +74,9 @@ function Login() {
       {errorMessage && (
         <p style={{ color: "red", marginTop: 10 }}>{errorMessage}</p>
       )}
+      
     </div>
+    
   );
 }
 

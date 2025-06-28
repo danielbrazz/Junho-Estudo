@@ -18,15 +18,11 @@ class FormLogin{
 		$user = $this->userLogin->get_user();
         $pass = $this->userLogin->get_pass();
  
-        $this->userLogin->ValidaLogin($user,$pass);
-
-        
+        $this->userLogin->ValidaLogin($user,$pass);        
     }
 }
 
 // Execução real
 $form = new FormLogin();
 $form->acessLogin();
-
-
 
