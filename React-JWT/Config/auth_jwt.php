@@ -42,7 +42,8 @@ class Auth_jwt
         } catch (ExpiredException $e) {
             return [
                 'valid' => false,
-                'message' => 'Token expirado'
+                'message' => 'Token expirado',
+                'exp'=>$e
             ];
         } catch (Exception $e) {
             return [
